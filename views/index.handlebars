@@ -1,0 +1,77 @@
+<main>
+
+  {{!-- container to center --}}
+  <div class="container">
+    <div class="col l1 1m 0s"></div>
+  </div>
+
+  {{!-- yellow notepad container --}}
+  <div class="col 10l 10m 12s">
+
+    <div class="container" style="background-color: #fffcd1; padding-bottom: 8%">
+      <div class="row">
+        <div class="headerPic center-align">
+          <h1 style="font-family: 'Permanent Marker', cursive; font-size: 34pt">Task Manager</h1>
+          <div class="container center-align">
+
+            {{!-- add task form --}}
+            <div class="row">
+              <div class="container center-align">
+                <div class="col l12 m12 s12" style="padding: 3%;">
+                  <div class="container">
+                    <form action="/tasks" method="POST">
+                      <input type="text" id="name" name="task_name" placeholder="Add a task to do" class="center-align"
+                        style="background-color: white">
+                      <button type="submit" class="addTaskButton">Submit</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {{!-- tasks list --}}
+            <div class="col l5 m5 s5">
+              <h2 style="font-family: 'Permanent Marker', cursive; font-size: 12pt">Todo:</h2>
+              {{#each tasks}}
+              {{#unless this.completed}}
+              <div>
+                <form action="/tasks/{{this.id}}?_method=PUT" method="POST">
+                  <button type="submit" class="taskAvailable">
+                    {{!-- <i class="small material-icons">check_box_outline_blank</i> --}}
+                    {{this.task_name}}
+                  </button>
+                </form>
+              </div>
+              {{/unless}}
+              {{/each}}
+            </div>
+            <div class="col l1 m1 s1"></div>
+            <div class="col l5 m5 s5">
+              <h2 style="font-family: 'Permanent Marker', cursive; font-size: 12pt; padding-bottom: 20px">Finished:</h2>
+              {{#each tasks}}
+              {{#if this.completed}}
+              <div class="completedTask">
+                {{!-- <i class="small material-icons">check_box</i> --}}
+                {{this.task_name}}
+              </div>
+              {{/if}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{!-- container to center --}}
+  <div class="container">
+    <div class="col l1 m1 s0"></div>
+  </div>
+
+  {{!-- footer --}}
+  <footer class="taskManagerFooter">
+    <div class="container center-align">
+      <a class="grey-text text-lighten-4 right" href="https://github.com/annasylvester/Task-Manager">Github Repo</a>
+    </div>
+  </footer>
+</main>
