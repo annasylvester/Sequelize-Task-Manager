@@ -1,11 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-  let Task = sequelize.define("Task", {
-    // Giving the Author model a name of type STRING
-    name: {
+  let Task = sequelize.define('Task', {
+    task_name: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    devoured: {
+    completed: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
