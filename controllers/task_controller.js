@@ -3,14 +3,8 @@ let db = require('../models');
 module.exports = function (app) {
     // Get Tasks
     app.get("/", function (req, res) {
-        db.Task.findAll({
-            order: [['task_name', 'ASC']]
-        }).then (function (result) {
-            let hbsObject = {
-                tasks: data
-            };
-            console.log(hbsObject);
-            res.render("index", hbsObject);
+        db.Task.findAll({}).then(function(dbTasks) {
+            res.render("index", {tasks: dbTasks});
         });
     });
 
@@ -24,14 +18,14 @@ module.exports = function (app) {
     });
 
     // Update Tasks
-    app.put("/", function(req, res) {
+    app.put("/:id", function(req, res) {
         db.Task.update({
-            completed: req.body.completed
+            completed: true
         }, {
             where: {
-                id: req.body.id
+                id: req.params.id
             }
-        }).then(function(task) {
+        }).then(function() {
             res.redirect("/");
         });
     });
