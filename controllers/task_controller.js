@@ -3,7 +3,9 @@ let db = require('../models');
 module.exports = function (app) {
     // Get Tasks
     app.get("/", function (req, res) {
-        db.Task.selectAll(function (data) {
+        db.Task.findAll({
+            order: [['task_name', 'ASC']]
+        }).then (function (result) {
             let hbsObject = {
                 tasks: data
             };
